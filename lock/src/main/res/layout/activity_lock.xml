@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#FFFFFF"
+              android:orientation="vertical"
+              tools:context=".activity.LockActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#000000">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_back"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/gesture_password"
+            android:textColor="#FFF"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/tv_reset"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:text="@string/reset"
+            android:textColor="#FFF"
+            android:textSize="18dp"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.hou.lock.widget.GestureLockIndicator
+            android:id="@+id/gesture_lock_indicator"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+        <TextView
+            android:id="@+id/tv_lock_explain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/lock_explain_color"
+            tools:text="@string/draw_unlock"/>
+
+        <com.hou.lock.widget.GestureLockView
+            android:id="@+id/gesture_lock_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:lock_cell_error_color="#F12A2A"
+            app:lock_cell_normal_color="#D7D6D6"
+            app:lock_cell_selected_color="#1590E2"/>
+
+        <TextView
+            android:id="@+id/tv_forget_gesture_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:text="@string/forget_gesture_password"
+            android:textColor="#37A0E2"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="GestureLockView">
+        <attr name="lock_cell_width" format="dimension"/>
+        <attr name="lock_cell_radius" format="dimension"/>
+        <attr name="lock_cell_center_radius" format="dimension"/>
+        <attr name="lock_cell_normal_color" format="color"/>
+        <attr name="lock_cell_selected_color" format="color"/>
+        <attr name="lock_cell_error_color" format="color"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="lock_normal_color">#D7D6D6</color>
+    <color name="lock_selected_color">#1590E2</color>
+    <color name="lock_error_color">#F12A2A</color>
+
+    <color name="lock_explain_color">#000000</color>
+    <color name="title_background_color">#000000</color>
+</resources>

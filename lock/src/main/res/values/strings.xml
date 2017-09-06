@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Lock</string>
+    <string name="draw_unlock">请绘制解锁图案</string>
+    <string name="draw_new_unlock">请绘制新解锁图案</string>
+    <string name="confirm_unlock">请确认解锁图案</string>
+    <string name="not_same_with_last">与上一次绘制不一致</string>
+    <string name="times_explain">密码错误，还可以再输入%d次</string>
+    <string name="point_count_explain">密码太短，请连接至少%d个点</string>
+    <string name="gesture_password">手势密码</string>
+    <string name="reset">重设</string>
+    <string name="forget_gesture_password">忘记手势密码？</string>
+</resources>
