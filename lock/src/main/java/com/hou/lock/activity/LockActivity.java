@@ -82,6 +82,9 @@ public class LockActivity extends AppCompatActivity {
 
     private void resetLockPassword() {
         LockBus.getDefault().send(new ErrorEvent());
+
+        Sp.getDefault(this).putInt(LockView.ERROR_TIMES, 5);
+
         setResult(OnUnLockCallback.TIMES_OF_ERROR_EXCEED_LIMIT_RESULT);
         finish();
     }

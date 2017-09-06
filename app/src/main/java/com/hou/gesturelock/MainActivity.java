@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
             public void call(Object o) {
                 if (o instanceof ErrorEvent) {
                     Toast.makeText(MainActivity.this, "错误次数超过限制", Toast.LENGTH_SHORT).show();
-                    Sp.getDefault(MainActivity.this).putInt(LockView.ERROR_TIMES, 5);
                 }
             }
         });
