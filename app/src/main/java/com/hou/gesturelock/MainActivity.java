@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GestureLock.setAlias("8888");
+        GestureLock.setAlias(this,"8888");
 
         //只要在app主页来注册监听即可
         rxSubscribe = LockBus.getDefault().toObservable().subscribe(new Action1<Object>() {

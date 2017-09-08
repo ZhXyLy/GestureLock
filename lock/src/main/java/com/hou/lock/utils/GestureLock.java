@@ -1,5 +1,7 @@
 package com.hou.lock.utils;
 
+import android.content.Context;
+
 /**
  * Created by Zxl on 2017/9/8
  */
@@ -10,7 +12,8 @@ public class GestureLock {
      *
      * @param userId
      */
-    public static void setAlias(String userId) {
+    public static void setAlias(Context context, String userId) {
+        Sp.init(context);
         Sp.setAlias(userId);
     }
 
