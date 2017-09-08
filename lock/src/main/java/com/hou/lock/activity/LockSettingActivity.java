@@ -26,6 +26,7 @@ import com.hou.lock.widget.GestureLockView;
 public class LockSettingActivity extends AppCompatActivity {
     public static final String STEP = "step";
     public static final String TITLE_BACKGROUND_COLOR = "title_background_color";
+    private Sp sp;
 
     public interface Step {
         int SET = 1;
@@ -50,6 +51,7 @@ public class LockSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
         activity = this;
+        sp = Sp.getDefault(activity);
 
         mLockView = (GestureLockView) findViewById(R.id.gesture_lock_view);
         mLockIndicator = (GestureLockIndicator) findViewById(R.id.gesture_lock_indicator);
@@ -61,7 +63,8 @@ public class LockSettingActivity extends AppCompatActivity {
 
         RelativeLayout rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
         rlTitle.setVisibility(View.VISIBLE);
-        int titleBgColor = getIntent().getIntExtra(LockSettingActivity.TITLE_BACKGROUND_COLOR, getResources().getColor(R.color.title_background_color));
+        int titleBgColor = getIntent().getIntExtra(LockSettingActivity.TITLE_BACKGROUND_COLOR,
+                getResources().getColor(R.color.title_background_color));
         rlTitle.setBackgroundColor(titleBgColor);
 
         Utils.setStatusBarColor(activity, titleBgColor, 200);
@@ -96,7 +99,7 @@ public class LockSettingActivity extends AppCompatActivity {
         }
 
         //取出缓存中错误的次数
-        errorTimes = Sp.getDefault(activity).getInt(LockView.ERROR_TIMES, 5);
+        errorTimes = sp.getInt(LockView.ERROR_TIMES, 5);
 
         mLockView.setOnLockNumListener(new OnLockNumListener() {
             @Override
@@ -104,17 +107,18 @@ public class LockSettingActivity extends AppCompatActivity {
                 switch (step) {
                     case Step.UPDATE:
                         //取出本地
-                        String lockPassword = Sp.getDefault(activity).getString(LockView.LOCK_P);
+
+                        String lockPassword = sp.getLock(activity);
                         if (lockPassword.equals(password)) {
                             step = Step.SET;
-                            Sp.getDefault(activity).putInt(LockView.ERROR_TIMES, 5);
+                            sp.putInt(LockView.ERROR_TIMES, 5);
                             clear(10);
                             tvLockExplain.setTextColor(getResources().getColor(R.color.lock_explain_color));
                             tvLockExplain.setText(R.string.draw_new_unlock);
                         } else {
                             errorTimes--;
                             if (errorTimes > 0) {
-                                Sp.getDefault(activity).putInt(LockView.ERROR_TIMES, errorTimes);
+                                sp.putInt(LockView.ERROR_TIMES, errorTimes);
 
                                 tvLockExplain.setTextColor(getResources().getColor(R.color.lock_error_color));
                                 tvLockExplain.setText(String.format(getString(R.string.times_explain), errorTimes));
@@ -145,7 +149,7 @@ public class LockSettingActivity extends AppCompatActivity {
                             tvLockExplain.setText(R.string.not_same_with_last);
                             clear(10);
                         } else {
-                            Sp.getDefault(activity).putString(LockView.LOCK_P, password);
+                            sp.setLock(activity,password);
 
                             setResult(RESULT_OK);
                             finish();
@@ -159,7 +163,7 @@ public class LockSettingActivity extends AppCompatActivity {
     private void resetLockPassword() {
         LockBus.getDefault().send(new ErrorEvent());
 
-        Sp.getDefault(this).putInt(LockView.ERROR_TIMES, 5);
+        sp.putInt(LockView.ERROR_TIMES, 5);
 
         setResult(OnUnLockCallback.TIMES_OF_ERROR_EXCEED_LIMIT_RESULT);
         finish();

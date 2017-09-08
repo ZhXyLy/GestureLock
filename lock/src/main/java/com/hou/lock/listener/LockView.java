@@ -6,6 +6,6 @@ package com.hou.lock.listener;
 
 public interface LockView {
 
-    String LOCK_P = "lock_password";
+    String LOCK_P = "lock_password_";
     String ERROR_TIMES = "error_times";
 }

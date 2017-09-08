@@ -2,12 +2,21 @@ package com.hou.lock.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.hou.lock.listener.LockView;
 
 /**
  * Created by Zxl on 2017/9/5
  */
 
 public class Sp {
+    private static final String TAG = "Sp";
+    private static String userId = "default";
+
+    public static void init(String id) {
+        userId = id;
+    }
 
     private static Sp Instance;
     private final SharedPreferences preferences;
@@ -37,5 +46,26 @@ public class Sp {
 
     public int getInt(String key, int defValue) {
         return preferences.getInt(key, defValue);
+    }
+
+    public void remove(String key) {
+        preferences.edit().remove(key).apply();
+    }
+
+    //------------------------------
+
+    public void setLock(Context context, String lock) {
+        Log.e(TAG, "setLock: 保存："+userId );
+        Sp.getDefault(context).putString(LockView.LOCK_P + userId, lock);
+    }
+
+    public String getLock(Context context) {
+        Log.e(TAG, "setLock: 获取："+userId );
+        return Sp.getDefault(context).getString(LockView.LOCK_P + userId);
+    }
+
+    public void clearLock(Context context) {
+        Log.e(TAG, "setLock: 删除："+userId );
+        Sp.getDefault(context).remove(LockView.LOCK_P + userId);
     }
 }

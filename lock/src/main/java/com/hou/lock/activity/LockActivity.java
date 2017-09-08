@@ -1,7 +1,10 @@
 package com.hou.lock.activity;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -20,19 +23,24 @@ import com.hou.lock.widget.GestureLockView;
 /**
  * 手势密码验证
  */
-public class LockActivity extends AppCompatActivity {
+public class LockActivity extends AppCompatActivity implements View.OnClickListener {
 
     private GestureLockView mLockView;
     private GestureLockIndicator mLockIndicator;
     private TextView tvLockExplain;//提示说明
 
     private int errorTimes;
+    private AlertDialog forgetDialog;
+    private Sp sp;
+    private Activity activity;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
+        activity = this;
+        sp = Sp.getDefault(activity);
 
         mLockView = (GestureLockView) findViewById(R.id.gesture_lock_view);
         mLockIndicator = (GestureLockIndicator) findViewById(R.id.gesture_lock_indicator);
@@ -40,6 +48,7 @@ public class LockActivity extends AppCompatActivity {
         //显示-忘记手势密码
         TextView tvForgetGesturePassword = (TextView) findViewById(R.id.tv_forget_gesture_password);
         tvForgetGesturePassword.setVisibility(View.VISIBLE);
+        tvForgetGesturePassword.setOnClickListener(this);
         //验证密码，隐藏Title
         RelativeLayout rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
         rlTitle.setVisibility(View.INVISIBLE);
@@ -50,20 +59,20 @@ public class LockActivity extends AppCompatActivity {
         errorTimes = Sp.getDefault(this).getInt(LockView.ERROR_TIMES, 5);
 
         //取出本地
-        final String lockP = Sp.getDefault(this).getString(LockView.LOCK_P);
+        final String lockP = sp.getLock(activity);
         mLockView.setOnLockNumListener(new OnLockNumListener() {
             @Override
             public void onLock(String password) {
 
                 if (password.equals(lockP)) {
-                    Sp.getDefault(LockActivity.this).putInt(LockView.ERROR_TIMES, 5);
+                    sp.putInt(LockView.ERROR_TIMES, 5);
 
                     setResult(RESULT_OK);
                     finish();
                 } else {
                     errorTimes--;
                     if (errorTimes > 0) {
-                        Sp.getDefault(LockActivity.this).putInt(LockView.ERROR_TIMES, errorTimes);
+                        sp.putInt(LockView.ERROR_TIMES, errorTimes);
 
                         tvLockExplain.setTextColor(getResources().getColor(R.color.lock_error_color));
                         tvLockExplain.setText(String.format(getString(R.string.times_explain), errorTimes));
@@ -83,7 +92,7 @@ public class LockActivity extends AppCompatActivity {
     private void resetLockPassword() {
         LockBus.getDefault().send(new ErrorEvent());
 
-        Sp.getDefault(this).putInt(LockView.ERROR_TIMES, 5);
+        sp.putInt(LockView.ERROR_TIMES, 5);
 
         setResult(OnUnLockCallback.TIMES_OF_ERROR_EXCEED_LIMIT_RESULT);
         finish();
@@ -102,5 +111,32 @@ public class LockActivity extends AppCompatActivity {
     public void onBackPressed() {
         // 返回键不结束activity，而是将应用退到后台
         moveTaskToBack(true);
+    }
+
+    @Override
+    public void onClick(View v) {
+        int i = v.getId();
+        //忘记密码
+        if (i == R.id.tv_forget_gesture_password) {
+            if (forgetDialog == null) {
+
+                forgetDialog = new AlertDialog.Builder(activity)
+                        .setTitle("提示")
+                        .setMessage("忘记手势密码，需要重新登录\n是否现在登录？")
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                sp.clearLock(activity);
+                                resetLockPassword();
+                            }
+                        })
+                        .create();
+            }
+            if (forgetDialog != null && !forgetDialog.isShowing()) {
+
+                forgetDialog.show();
+            }
+        }
     }
 }

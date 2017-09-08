@@ -8,10 +8,9 @@ import android.widget.Toast;
 
 import com.hou.lock.activity.LockActivity;
 import com.hou.lock.activity.LockSettingActivity;
-import com.hou.lock.listener.LockView;
 import com.hou.lock.utils.ErrorEvent;
+import com.hou.lock.utils.GestureLock;
 import com.hou.lock.utils.LockBus;
-import com.hou.lock.utils.Sp;
 
 import rx.Subscription;
 import rx.functions.Action1;
@@ -25,11 +24,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        GestureLock.setAlias("8888");
+
+        //只要在app主页来注册监听即可
         rxSubscribe = LockBus.getDefault().toObservable().subscribe(new Action1<Object>() {
             @Override
             public void call(Object o) {
                 if (o instanceof ErrorEvent) {
-                    Toast.makeText(MainActivity.this, "错误次数超过限制", Toast.LENGTH_SHORT).show();
+                    //这里退出登录等操作
+                    Toast.makeText(MainActivity.this, "退出登录，重新去登录", Toast.LENGTH_SHORT).show();
                 }
             }
         });
