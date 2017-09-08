@@ -56,17 +56,14 @@ public class Sp {
     //------------------------------
 
     public void setLock(String lock) {
-        Log.e(TAG, "setLock: 保存：" + userId);
         Sp.getDefault().putString(LockView.LOCK_P + userId, lock);
     }
 
     public String getLock() {
-        Log.e(TAG, "setLock: 获取：" + userId);
         return Sp.getDefault().getString(LockView.LOCK_P + userId);
     }
 
     public void clearLock() {
-        Log.e(TAG, "setLock: 删除：" + userId);
         Sp.getDefault().remove(LockView.LOCK_P + userId);
     }
 }
