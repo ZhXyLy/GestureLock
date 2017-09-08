@@ -14,17 +14,18 @@ public class Sp {
     private static final String TAG = "Sp";
     private static String userId = "default";
 
-    public static void init(String id) {
+    public static void setAlias(String id) {
         userId = id;
     }
 
     private static Sp Instance;
     private final SharedPreferences preferences;
 
-    public static Sp getDefault(Context context) {
-        if (Instance == null) {
-            Instance = new Sp(context);
-        }
+    public static void init(Context appContext) {
+        Instance = new Sp(appContext);
+    }
+
+    public static Sp getDefault() {
         return Instance;
     }
 
@@ -54,18 +55,18 @@ public class Sp {
 
     //------------------------------
 
-    public void setLock(Context context, String lock) {
-        Log.e(TAG, "setLock: 保存："+userId );
-        Sp.getDefault(context).putString(LockView.LOCK_P + userId, lock);
+    public void setLock(String lock) {
+        Log.e(TAG, "setLock: 保存：" + userId);
+        Sp.getDefault().putString(LockView.LOCK_P + userId, lock);
     }
 
-    public String getLock(Context context) {
-        Log.e(TAG, "setLock: 获取："+userId );
-        return Sp.getDefault(context).getString(LockView.LOCK_P + userId);
+    public String getLock() {
+        Log.e(TAG, "setLock: 获取：" + userId);
+        return Sp.getDefault().getString(LockView.LOCK_P + userId);
     }
 
-    public void clearLock(Context context) {
-        Log.e(TAG, "setLock: 删除："+userId );
-        Sp.getDefault(context).remove(LockView.LOCK_P + userId);
+    public void clearLock() {
+        Log.e(TAG, "setLock: 删除：" + userId);
+        Sp.getDefault().remove(LockView.LOCK_P + userId);
     }
 }

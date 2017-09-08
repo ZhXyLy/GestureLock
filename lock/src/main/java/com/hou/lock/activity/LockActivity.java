@@ -40,7 +40,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
         activity = this;
-        sp = Sp.getDefault(activity);
+        sp = Sp.getDefault();
 
         mLockView = (GestureLockView) findViewById(R.id.gesture_lock_view);
         mLockIndicator = (GestureLockIndicator) findViewById(R.id.gesture_lock_indicator);
@@ -56,10 +56,10 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         tvLockExplain.setText(R.string.draw_unlock);
 
         //取出缓存中错误的次数
-        errorTimes = Sp.getDefault(this).getInt(LockView.ERROR_TIMES, 5);
+        errorTimes = Sp.getDefault().getInt(LockView.ERROR_TIMES, 5);
 
         //取出本地
-        final String lockP = sp.getLock(activity);
+        final String lockP = sp.getLock();
         mLockView.setOnLockNumListener(new OnLockNumListener() {
             @Override
             public void onLock(String password) {
@@ -127,7 +127,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
                         .setPositiveButton("重新登录", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                sp.clearLock(activity);
+                                sp.clearLock();
                                 resetLockPassword();
                             }
                         })

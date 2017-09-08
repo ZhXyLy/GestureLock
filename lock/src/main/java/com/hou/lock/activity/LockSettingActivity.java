@@ -1,6 +1,5 @@
 package com.hou.lock.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -44,14 +43,11 @@ public class LockSettingActivity extends AppCompatActivity {
     private int errorTimes;
     private String firstPassword;
 
-    private Activity activity;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
-        activity = this;
-        sp = Sp.getDefault(activity);
+        sp = Sp.getDefault();
 
         mLockView = (GestureLockView) findViewById(R.id.gesture_lock_view);
         mLockIndicator = (GestureLockIndicator) findViewById(R.id.gesture_lock_indicator);
@@ -67,7 +63,7 @@ public class LockSettingActivity extends AppCompatActivity {
                 getResources().getColor(R.color.title_background_color));
         rlTitle.setBackgroundColor(titleBgColor);
 
-        Utils.setStatusBarColor(activity, titleBgColor, 200);
+        Utils.setStatusBarColor(this, titleBgColor, 200);
 
         step = getIntent().getIntExtra(LockSettingActivity.STEP, Step.SET);
 
@@ -92,7 +88,7 @@ public class LockSettingActivity extends AppCompatActivity {
                 }
             });
             tvLockExplain.setText(R.string.confirm_unlock);
-            errorTimes = Sp.getDefault(this).getInt(LockView.ERROR_TIMES, 5);
+            errorTimes = Sp.getDefault().getInt(LockView.ERROR_TIMES, 5);
         } else {
             ivBack.setVisibility(View.INVISIBLE);
             tvLockExplain.setText(R.string.draw_unlock);
@@ -108,7 +104,7 @@ public class LockSettingActivity extends AppCompatActivity {
                     case Step.UPDATE:
                         //取出本地
 
-                        String lockPassword = sp.getLock(activity);
+                        String lockPassword = sp.getLock();
                         if (lockPassword.equals(password)) {
                             step = Step.SET;
                             sp.putInt(LockView.ERROR_TIMES, 5);
@@ -149,7 +145,7 @@ public class LockSettingActivity extends AppCompatActivity {
                             tvLockExplain.setText(R.string.not_same_with_last);
                             clear(10);
                         } else {
-                            sp.setLock(activity,password);
+                            sp.setLock(password);
 
                             setResult(RESULT_OK);
                             finish();
