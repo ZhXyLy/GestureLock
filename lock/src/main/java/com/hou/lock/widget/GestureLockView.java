@@ -60,7 +60,7 @@ public class GestureLockView extends View {
         super(context, attrs, defStyle);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.GestureLockView);
-        float cellWidth = a.getDimension(R.styleable.GestureLockView_lock_cell_width, 3);
+        float cellWidth = a.getDimension(R.styleable.GestureLockView_lock_cell_width, Utils.dp2px(context, 1));
         cellRadius = a.getDimension(R.styleable.GestureLockView_lock_cell_radius, 0);
         float cellCenterRadius = a.getDimension(R.styleable.GestureLockView_lock_cell_center_radius, Utils.dp2px(context, 8));
         int normalColor = a.getColor(R.styleable.GestureLockView_lock_cell_normal_color, getResources().getColor(R.color.lock_normal_color));

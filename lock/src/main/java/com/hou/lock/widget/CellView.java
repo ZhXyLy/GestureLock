@@ -22,7 +22,7 @@ public class CellView {
     private float radius;
     private float centerRadius;
 
-    private float circleWidth = 5;
+    private float circleWidth = 2;
 
     private int normalColor = Color.LTGRAY;
     private int selectedColor = Color.BLUE;

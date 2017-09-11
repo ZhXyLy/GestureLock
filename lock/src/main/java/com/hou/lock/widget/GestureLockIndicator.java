@@ -1,16 +1,15 @@
 package com.hou.lock.widget;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
 import com.hou.lock.R;
+import com.hou.lock.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +59,7 @@ public class GestureLockIndicator extends View {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.LTGRAY);
+        mPaint.setStrokeWidth(Utils.dp2px(getContext(), 1));
     }
 
     @Override
@@ -94,7 +94,6 @@ public class GestureLockIndicator extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mPaint.setStrokeWidth(3);
         //绘制Cell
         for (IndicatorCell ic : cells) {
             if (password.contains(String.valueOf(ic.getNum()))) {

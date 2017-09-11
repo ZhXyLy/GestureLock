@@ -38,7 +38,7 @@ public class Sp {
     }
 
     public String getString(String key) {
-        return preferences.getString(key, null);
+        return preferences.getString(key, "");
     }
 
     public void putInt(String key, int value) {

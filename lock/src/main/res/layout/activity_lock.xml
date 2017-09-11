@@ -64,10 +64,10 @@
             android:id="@+id/gesture_lock_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            app:lock_cell_error_color="#F12A2A"
-            app:lock_cell_normal_color="#D7D6D6"
-            app:lock_cell_selected_color="#1590E2"/>
+            android:padding="25dp"
+            app:lock_cell_error_color="@color/lock_error_color"
+            app:lock_cell_normal_color="@color/lock_normal_color"
+            app:lock_cell_selected_color="@color/lock_selected_color"/>
 
         <TextView
             android:id="@+id/tv_forget_gesture_password"
