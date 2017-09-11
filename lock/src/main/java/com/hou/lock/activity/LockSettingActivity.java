@@ -60,7 +60,7 @@ public class LockSettingActivity extends AppCompatActivity {
         RelativeLayout rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
         rlTitle.setVisibility(View.VISIBLE);
         int titleBgColor = getIntent().getIntExtra(LockSettingActivity.TITLE_BACKGROUND_COLOR,
-                getResources().getColor(R.color.title_background_color));
+                getResources().getColor(R.color.lock_title_background_color));
         rlTitle.setBackgroundColor(titleBgColor);
 
         Utils.setStatusBarColor(this, titleBgColor, 200);
@@ -74,7 +74,7 @@ public class LockSettingActivity extends AppCompatActivity {
                 tvReset.setVisibility(View.INVISIBLE);
                 step = Step.SET;
                 tvLockExplain.setTextColor(getResources().getColor(R.color.lock_explain_color));
-                tvLockExplain.setText(R.string.draw_unlock);
+                tvLockExplain.setText(R.string.lock_draw_unlock);
                 mLockIndicator.setIndicator("");
             }
         });
@@ -87,11 +87,11 @@ public class LockSettingActivity extends AppCompatActivity {
                     finish();
                 }
             });
-            tvLockExplain.setText(R.string.confirm_unlock);
+            tvLockExplain.setText(R.string.lock_confirm_unlock);
             errorTimes = Sp.getDefault().getInt(LockView.ERROR_TIMES, 5);
         } else {
             ivBack.setVisibility(View.INVISIBLE);
-            tvLockExplain.setText(R.string.draw_unlock);
+            tvLockExplain.setText(R.string.lock_draw_unlock);
         }
 
         //取出缓存中错误的次数
@@ -110,14 +110,14 @@ public class LockSettingActivity extends AppCompatActivity {
                             sp.putInt(LockView.ERROR_TIMES, 5);
                             clear(10);
                             tvLockExplain.setTextColor(getResources().getColor(R.color.lock_explain_color));
-                            tvLockExplain.setText(R.string.draw_new_unlock);
+                            tvLockExplain.setText(R.string.lock_draw_new_unlock);
                         } else {
                             errorTimes--;
                             if (errorTimes > 0) {
                                 sp.putInt(LockView.ERROR_TIMES, errorTimes);
 
                                 tvLockExplain.setTextColor(getResources().getColor(R.color.lock_error_color));
-                                tvLockExplain.setText(String.format(getString(R.string.times_explain), errorTimes));
+                                tvLockExplain.setText(String.format(getString(R.string.lock_times_explain), errorTimes));
                                 clear(10);
                             } else {
                                 resetLockPassword();
@@ -127,14 +127,14 @@ public class LockSettingActivity extends AppCompatActivity {
                     case Step.SET:
                         if (password.length() < 4) {
                             tvLockExplain.setTextColor(getResources().getColor(R.color.lock_error_color));
-                            tvLockExplain.setText(String.format(getString(R.string.point_count_explain), 4));
+                            tvLockExplain.setText(String.format(getString(R.string.lock_point_count_explain), 4));
                             clear(10);
                         } else {
                             firstPassword = password;
                             clear(10);
                             mLockIndicator.setIndicator(password);
                             tvLockExplain.setTextColor(getResources().getColor(R.color.lock_explain_color));
-                            tvLockExplain.setText(R.string.confirm_unlock);
+                            tvLockExplain.setText(R.string.lock_confirm_unlock);
                             step = Step.CONFIRM;
                         }
                         break;
@@ -142,7 +142,7 @@ public class LockSettingActivity extends AppCompatActivity {
                         if (!password.equals(firstPassword)) {
                             tvReset.setVisibility(View.VISIBLE);
                             tvLockExplain.setTextColor(getResources().getColor(R.color.lock_error_color));
-                            tvLockExplain.setText(R.string.not_same_with_last);
+                            tvLockExplain.setText(R.string.lock_not_same_with_last);
                             clear(10);
                         } else {
                             sp.setLock(password);

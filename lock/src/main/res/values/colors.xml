@@ -5,5 +5,5 @@
     <color name="lock_error_color">#F12A2A</color>
 
     <color name="lock_explain_color">#000000</color>
-    <color name="title_background_color">#000000</color>
+    <color name="lock_title_background_color">#000000</color>
 </resources>

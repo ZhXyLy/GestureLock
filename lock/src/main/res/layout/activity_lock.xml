@@ -19,14 +19,14 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:padding="5dp"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/ic_lock_back"/>
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="@string/gesture_password"
+            android:text="@string/lock_gesture_password"
             android:textColor="#FFF"
             android:textSize="18dp"/>
 
@@ -36,7 +36,7 @@
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
             android:gravity="center"
-            android:text="@string/reset"
+            android:text="@string/lock_reset"
             android:textColor="#FFF"
             android:textSize="18dp"/>
     </RelativeLayout>
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textColor="@color/lock_explain_color"
-            tools:text="@string/draw_unlock"/>
+            tools:text="@string/lock_draw_unlock"/>
 
         <com.hou.lock.widget.GestureLockView
             android:id="@+id/gesture_lock_view"
@@ -77,7 +77,7 @@
             android:layout_centerHorizontal="true"
             android:paddingBottom="15dp"
             android:paddingTop="15dp"
-            android:text="@string/forget_gesture_password"
+            android:text="@string/lock_forget_gesture_password"
             android:textColor="#37A0E2"/>
     </LinearLayout>
 </LinearLayout>

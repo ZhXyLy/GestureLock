@@ -53,7 +53,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         RelativeLayout rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
         rlTitle.setVisibility(View.INVISIBLE);
 
-        tvLockExplain.setText(R.string.draw_unlock);
+        tvLockExplain.setText(R.string.lock_draw_unlock);
 
         //取出缓存中错误的次数
         errorTimes = Sp.getDefault().getInt(LockView.ERROR_TIMES, 5);
@@ -75,7 +75,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
                         sp.putInt(LockView.ERROR_TIMES, errorTimes);
 
                         tvLockExplain.setTextColor(getResources().getColor(R.color.lock_error_color));
-                        tvLockExplain.setText(String.format(getString(R.string.times_explain), errorTimes));
+                        tvLockExplain.setText(String.format(getString(R.string.lock_times_explain), errorTimes));
 
                     } else {
                         resetLockPassword();
