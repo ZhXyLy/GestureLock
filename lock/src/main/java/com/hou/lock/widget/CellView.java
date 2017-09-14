@@ -195,8 +195,8 @@ public class CellView {
     private void drawTriangle(Canvas canvas, Paint paint) {
         if (num != lastCell) {
             path.reset();
-            float triangleDistance = 20;//三角边长
-            float distance = centerRadius + 20 + triangleDistance;//三角定点位置,间隔5
+            float triangleDistance = radius / 5;//三角边长
+            float distance = centerRadius + triangleDistance + triangleDistance;//三角定点位置,间隔5
             float triangle = 15;//向两边的角度，计算三角两边位置
             path.moveTo(centerX + distance * Utils.cos(angle), centerY + distance * Utils.sin(angle));
             path.lineTo(centerX + (distance - triangleDistance) * Utils.cos(angle + triangle),
