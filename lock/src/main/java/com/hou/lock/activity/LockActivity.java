@@ -93,6 +93,7 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         LockBus.getDefault().send(new ErrorEvent());
 
         sp.putInt(LockView.ERROR_TIMES, 5);
+        sp.clearLock();
 
         setResult(OnUnLockCallback.TIMES_OF_ERROR_EXCEED_LIMIT_RESULT);
         finish();
