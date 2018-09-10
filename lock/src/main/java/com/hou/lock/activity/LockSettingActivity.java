@@ -65,7 +65,7 @@ public class LockSettingActivity extends AppCompatActivity {
                 getResources().getColor(R.color.lock_title_background_color));
         rlTitle.setBackgroundColor(titleBgColor);
 
-        Utils.setStatusBarColor(this, titleBgColor, 200);
+//        Utils.setStatusBarColor(this, titleBgColor, 200);
 
         boolean lightStatusBar = getIntent().getBooleanExtra(LockSettingActivity.LIGHT_STATUS_BAR, false);
         Utils.switchLightOrDarkStatusBar(this, lightStatusBar);
