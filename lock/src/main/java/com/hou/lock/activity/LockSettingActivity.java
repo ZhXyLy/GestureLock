@@ -21,10 +21,12 @@ import com.hou.lock.widget.GestureLockView;
 
 /**
  * 手势密码验证
+ * @author zhaoxl
  */
 public class LockSettingActivity extends AppCompatActivity {
     public static final String STEP = "step";
     public static final String TITLE_BACKGROUND_COLOR = "title_background_color";
+    public static final String LIGHT_STATUS_BAR = "is_light_status_bar";
     private Sp sp;
 
     public interface Step {
@@ -64,6 +66,9 @@ public class LockSettingActivity extends AppCompatActivity {
         rlTitle.setBackgroundColor(titleBgColor);
 
         Utils.setStatusBarColor(this, titleBgColor, 200);
+
+        boolean lightStatusBar = getIntent().getBooleanExtra(LockSettingActivity.LIGHT_STATUS_BAR, false);
+        Utils.switchLightOrDarkStatusBar(this, lightStatusBar);
 
         step = getIntent().getIntExtra(LockSettingActivity.STEP, Step.SET);
 
