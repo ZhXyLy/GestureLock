@@ -11,7 +11,12 @@
     <RelativeLayout
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:gravity="bottom"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:background="#000000">
 
         <ImageView
@@ -24,8 +29,9 @@
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
             android:text="@string/lock_gesture_password"
             android:textColor="#FFF"
             android:textSize="18dp"/>
@@ -38,7 +44,8 @@
             android:gravity="center"
             android:text="@string/lock_reset"
             android:textColor="#FFF"
-            android:textSize="18dp"/>
+            android:textSize="18dp"
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 
     <LinearLayout

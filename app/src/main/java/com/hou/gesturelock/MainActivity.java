@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LockSettingActivity.class);
         intent.putExtra(LockSettingActivity.STEP, LockSettingActivity.Step.UPDATE);
         intent.putExtra(LockSettingActivity.TITLE_BACKGROUND_COLOR, getResources().getColor(R.color.colorPrimary));
+//        intent.putExtra(LockSettingActivity.LIGHT_STATUS_BAR, true);
         startActivity(intent);
     }
 

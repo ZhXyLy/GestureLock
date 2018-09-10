@@ -2,12 +2,12 @@ package com.hou.lock.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hou.lock.R;
@@ -17,6 +17,7 @@ import com.hou.lock.listener.OnUnLockCallback;
 import com.hou.lock.utils.ErrorEvent;
 import com.hou.lock.utils.LockBus;
 import com.hou.lock.utils.Sp;
+import com.hou.lock.utils.Utils;
 import com.hou.lock.widget.GestureLockIndicator;
 import com.hou.lock.widget.GestureLockView;
 
@@ -39,6 +40,10 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
+
+        Utils.setStatusBarColor(this, Color.TRANSPARENT,0);
+        Utils.switchLightOrDarkStatusBar(this, true);
+
         activity = this;
         sp = Sp.getDefault();
 
@@ -49,9 +54,6 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
         TextView tvForgetGesturePassword = (TextView) findViewById(R.id.tv_forget_gesture_password);
         tvForgetGesturePassword.setVisibility(View.VISIBLE);
         tvForgetGesturePassword.setOnClickListener(this);
-        //验证密码，隐藏Title
-        RelativeLayout rlTitle = (RelativeLayout) findViewById(R.id.rl_title);
-        rlTitle.setVisibility(View.INVISIBLE);
 
         tvLockExplain.setText(R.string.lock_draw_unlock);
 
