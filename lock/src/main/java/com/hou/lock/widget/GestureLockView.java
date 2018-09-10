@@ -179,6 +179,10 @@ public class GestureLockView extends View {
                 CellView cell = getCellAt(x, y);
                 //触摸点在Cell范围内，并且此点没有被选中，就添加入选中集合中
                 if (cell != null && !cell.isSelected()) {
+                    if (selectCellViews.size() > 0) {
+                        //添加中间点
+                        findCellBetweenTwoPoint(selectCellViews.get(selectCellViews.size() - 1), cell);
+                    }
                     cell.setSelected(true);
                     cell.setStatus(CellView.Status.SELECTED);
                     lastCell = cell.getNum();
@@ -192,6 +196,7 @@ public class GestureLockView extends View {
                 break;
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
+            default:
                 if (selectCellViews.size() > 0) {
 
                     passwordSb.setLength(0);
@@ -206,6 +211,22 @@ public class GestureLockView extends View {
                 break;
         }
         return true;
+    }
+
+    private void findCellBetweenTwoPoint(CellView first, CellView second) {
+        float firstX = first.getCenterX();
+        float firstY = first.getCenterY();
+        float secondX = second.getCenterX();
+        float secondY = second.getCenterY();
+        float centerX = (secondX - firstX) / 2 + firstX;
+        float centerY = (secondY - firstY) / 2 + firstY;
+
+        CellView cell = getCellAt(centerX, centerY);
+        if (cell != null && !cell.isSelected()) {
+            cell.setSelected(true);
+            cell.setStatus(CellView.Status.SELECTED);
+            selectCellViews.add(cell);
+        }
     }
 
     private CellView getCellAt(float x, float y) {
