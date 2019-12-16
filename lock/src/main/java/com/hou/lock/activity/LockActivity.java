@@ -2,6 +2,7 @@ package com.hou.lock.activity;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
