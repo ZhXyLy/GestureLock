@@ -50,6 +50,9 @@ public class LockSettingActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
+        //固定屏幕-竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         sp = Sp.getDefault();
 
         mLockView = (GestureLockView) findViewById(R.id.gesture_lock_view);

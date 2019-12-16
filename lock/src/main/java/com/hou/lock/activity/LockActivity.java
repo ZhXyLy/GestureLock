@@ -40,6 +40,8 @@ public class LockActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lock);
+        //固定屏幕-竖屏
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         Utils.setStatusBarColor(this, Color.TRANSPARENT,0);
         Utils.switchLightOrDarkStatusBar(this, true);
